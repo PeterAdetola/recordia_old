@@ -1,2 +1,2 @@
 # recordia
-Record diary for donations and events
+Record diary for event donations
