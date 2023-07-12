@@ -23,6 +23,12 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/custom/custom.css') }}">
     <!-- END: Custom CSS-->
+<style type="text/css">
+  form:invalid button {
+   pointer-events: none;
+   /*opacity: .8;*/
+}
+</style>
   </head>
   <!-- END: Head-->
   <body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 1-column    blank-page blank-page" data-open="click" data-menu="vertical-modern-menu" data-col="1-column">
@@ -85,10 +91,14 @@
       </div>
       <div class="row pl-5 pr-5">
         <div class="input-field right">
-          <button class="btn-large waves-effect waves-light">{{ __('Log in') }}</button>
+          <button class="btn-large waves-effect waves-light"  onclick="ShowPreloader()">{{ __('Log in') }}</button>
         </div>
       </div>
-      <div class="divider"></div>
+
+              <div class="progress collection">
+                <div id="preloader" class="indeterminate"  style="display:none; 
+                border:2px #ebebeb solid"></div>
+              </div>
       <div class="row">
         <div class="input-field col s6 m6">
             @if (Route::has('password.request'))
@@ -119,5 +129,11 @@
     <!-- END THEME  JS-->
     <!-- BEGIN PAGE LEVEL JS-->
     <!-- END PAGE LEVEL JS-->
+    
+    <script type='text/javascript'>
+      function ShowPreloader() {
+        document.getElementById('preloader').style.display = "block";
+      }
+    </script>
   </body>
 </html>

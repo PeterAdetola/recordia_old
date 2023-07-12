@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Recordia | Financial recording for transparency</title>
+  <title>Recordia | Record diary for event donations</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -37,12 +37,12 @@
         <li><a href="#developer">Developer</a></li>
             @if (Route::has('login'))
                     @auth
-        <li><a class="chip" href="{{ url('/dashboard') }}">Dashboard</a></li>
+        <li><a class="chip red red-text lighten-4" href="{{ url('/dashboard') }}">Dashboard</a></li>
                     @else
-        <li><a class="chip" href="{{ route('login') }}">Log in</a></li>
+        <li><a class="chip red red-text lighten-4" href="{{ route('login') }}">Log in</a></li>
 
                         @if (Route::has('register'))
-        <li><a class="chip" href="{{ route('register') }}">Register</a></li>
+        <li><a class="chip red red-text lighten-4" href="{{ route('register') }}">Register</a></li>
                         @endif
                     @endauth
             @endif
@@ -221,7 +221,7 @@
           <ul>
             @if (Route::has('login'))
                     @auth
-            <li><a class="white-text" href="{{ route('/dashboard') }}">Dashboard</a></li>
+            <li><a class="white-text" href="{{ route('dashboard') }}">Dashboard</a></li>
                     @else
             <li><a class="white-text" href="{{ route('login') }}">Log in</a></li>
 

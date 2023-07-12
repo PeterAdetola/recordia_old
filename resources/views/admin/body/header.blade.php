@@ -1,4 +1,14 @@
 <!-- BEGIN: Header-->
+
+            @php
+            $id = Auth::user()->id;
+            $adminData = App\Models\User::find($id);
+            $records = App\Models\InstantRecord::all();
+            $unverifiedDonations = $records->where('transaction', '=', 'credit')
+                                           ->where('payment_status', '=', 'Paid')
+                                           ->where('verified', '=', '0');
+            $unverifiedRecordsCounts = $unverifiedDonations->count();                    
+            @endphp
     <header class="page-topbar" id="header">
       <div class="navbar navbar-fixed"> 
         <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-purple no-shadow">
@@ -8,15 +18,16 @@
               <ul class="search-list collection display-none"></ul>
             </div>
             <ul class="navbar-list right">
+              <li class="hide-on-med-and-down"><a class="waves-effect waves-block waves-light toggle-fullscreen tooltipped" href="{{ ('create.year') }}"  data-position="bottom" data-tooltip="Create year"><i class="material-icons">add_box</i></a></li>
               <li class="hide-on-med-and-down"><a class="waves-effect waves-block waves-light toggle-fullscreen" href="javascript:void(0);"><i class="material-icons">settings_overscan</i></a></li>
               <li class="hide-on-large-only search-input-wrapper"><a class="waves-effect waves-block waves-light search-button" href="javascript:void(0);"><i class="material-icons">search</i></a></li>
-              <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown"><i class="material-icons">notifications_none<small class="notification-badge">5</small></i></a></li>
+              <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown"><i class="material-icons">notifications_none<small class="notification-badge">{{$unverifiedRecordsCounts}}</small></i></a></li>
               <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online"><img src="{{ asset('backend/assets/images/avatar/avatar-7.png') }}" alt="avatar"><i></i></span></a></li>
             </ul>
             <!-- notifications-dropdown-->
             <ul class="dropdown-content" id="notifications-dropdown">
               <li>
-                <h6>NOTIFICATIONS<span class="new badge">5</span></h6>
+                <h6>NOTIFICATIONS<span class="new badge">{{$unverifiedRecordsCounts}}</span></h6>
               </li>
               <li class="divider"></li>
               <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!</a>
